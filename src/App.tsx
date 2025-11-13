@@ -7,12 +7,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Menu defaultIndex={0}onSelect={(index)=>{alert(index)}}>
-          <MenuItem index={1}>cool link1</MenuItem>
-          <MenuItem index={2}>cool link2</MenuItem>
-          <MenuItem index={3}>cool link3</MenuItem>
-          <MenuItem index={4}>cool link4</MenuItem>
-        </Menu>
+    <Menu defaultIndex={0} onSelect={(index) => alert(index)}>
+  <MenuItem index={""}>cool link1</MenuItem>
+  <MenuItem index={""}>cool link2</MenuItem>
+  <MenuItem index={""}>cool link3</MenuItem>
+  <MenuItem index={""}>cool link4</MenuItem>
+</Menu>
+
 
         <Button autoFocus>hello</Button>
         <Button disabled>hello</Button>

@@ -1,34 +1,38 @@
 import classNames from "classnames";
 import React, { useContext } from "react";
-import {MenuContext} from "./menu";
+import { MenuContext } from "./menu";
 
 export interface MenuItemProps {
-  index: number;
+  index?: string;
   className?: string;
   disabled?: boolean;
   style?: React.CSSProperties;
-  children?:React.ReactNode
+  children?: React.ReactNode;
 }
 
+const MenuItem: React.FC<MenuItemProps> = (props) => {
+  const { index, disabled, className, style, children } = props;
+  const context = useContext(MenuContext);
 
-const MenuItem:React.FC<MenuItemProps> = (props) => {
-     const context=useContext(MenuContext)
-    const {index,disabled,className,style,children}=props
-    const classes=classNames('menu-item',className,{
-        'is-disabled':disabled,
-        'is-active':context.index===index
-    })
+  const classes = classNames("menu-item", className, {
+    "is-disabled": disabled,
+    "is-active": context.index === index,
+  });
 
-    const handleClick=()=>{
-        if(context.onSelect&&!disabled){
-            context.onSelect(index)
-        }
+  const handleClick = () => {
+    if (context.onSelect && !disabled && typeof index === "string") {
+      context.onSelect(parseInt(index, 10)); // 转成数字再传回去
     }
-  return (
-  <li className={classes} style={style} onClick={handleClick}>
-    {children}
-  </li>
-  )
-}
+  };
 
-export default MenuItem
+  return (
+    <li className={classes} style={style} onClick={handleClick}>
+      {children}
+    </li>
+  );
+};
+
+// ✅ 添加 displayName 方便父组件识别
+MenuItem.displayName = "MenuItem";
+
+export default MenuItem;
